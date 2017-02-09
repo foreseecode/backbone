@@ -602,7 +602,10 @@
         if (success) success.call(options.context, model, resp, options);
         model.trigger('sync', model, resp, options);
       };
-      wrapError(this, options);
+      
+      
+      
+      (this, options);
       return this.sync('read', this, options);
     },
 
@@ -2017,10 +2020,12 @@
   // Wrap an optional error callback with a fallback error event.
   var wrapError = function(model, options) {
     var error = options.error;
-    options.error = function(resp) {
-      if (error) error.call(options.context, model, resp, options);
-      model.trigger('error', model, resp, options);
-    };
+    if (error) {
+      options.error = function(resp) {
+        error.call(options.context, model, resp, options);
+        model.trigger('error', model, resp, options);
+      };
+    }
   };
 
   return Backbone;
