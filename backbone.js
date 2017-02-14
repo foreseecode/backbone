@@ -325,7 +325,8 @@
     if (callback) {
       var once = map[name] = _.once(function() {
         offer(name, once);
-        callback.apply(this, arguments);
+        callback.apply
+        arguments);
       });
       once._callback = callback;
     }
@@ -602,10 +603,8 @@
         if (success) success.call(options.context, model, resp, options);
         model.trigger('sync', model, resp, options);
       };
-      
-      
-      
-      (this, options);
+           
+      wrapError(this, options);
       return this.sync('read', this, options);
     },
 
